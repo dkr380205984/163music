@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>163.music</title>
+    <meta name="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <style>
+  	.foot{position: absolute;bottom:0px;width:100%;height:48px;background-color:rgba(0,0,0,0.7)}
+  	.father{margin:0 auto;width:980px;height:48px;position:relative;}
+  	.left{width:120px;height:48px;position:absolute;left:0;line-height:48px}
+  	.playbt{width:32px;height:32px;border:3px solid white;border-radius:50%;margin:5px 3px;position:absolute;left:38px }
+  	.playbt .play{margin:6px 10px;border-left:3px solid white;border-right:3px solid white;width:6px;height:20px;}
+ 	.playbt .pause{width:0px;height:0px;margin:8px 6px 8px 10px;border-left:16px solid white;border-top:8px solid rgba(0,0,0,0);border-bottom:8px solid rgba(0,0,0,0);}
+ 	.lastbt{width:38px;height:48px;float:left;}
+ 	.nextbt{width:38px;height:48px;float:right;}
+ 	.lastbt .last{margin:12px 6px;border-right:20px solid white;border-left:3px solid white;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);}
+ 	.nextbt .next{margin:12px 6px;border-right:3px solid white;border-left:20px solid white;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);}
+  </style>
+  <link rel="stylesheet" href="../css/reset.css" type="text/css">
+  <script src="../js/jquery-1.11.1.js"></script>
+  <body>
+  	<audio src="http://mp3.haoduoge.com/s/2017-07-16/1500187827.mp3"></audio>
+  	<div class="foot">
+	  	<div class="father">
+		  		<div class="left">
+		  			<div class="lastbt">
+		  				<div class="last"></div>
+		  			</div>
+		  			<div class="playbt">
+		  				<div class="pause"></div>
+		  			</div>
+		  			<div class="nextbt">
+		  				<div class="next"></div>
+		  			</div>
+		  		</div>
+		  		<div class="middle"></div>
+		  		<div class="right"></div>
+		  	</div>
+	  	</div>
+  </body>
+	
+ <script type="text/javascript">
+ 	
+ 	/*
+ 		controls:显示或者隐藏
+ 		autoplay：媒体是否自动播放
+ 		autobuffer：媒体是否自动加载，如果有autoplay，这属性跟没有一样
+ 		loop:媒体是否循环播放
+ 		currentTime:媒体的当前播放时间，可读可写
+ 		duration:媒体的总播放时间，只读
+ 		volume：媒体音量设置(0-1之间)
+ 		muted：是否静音
+ 		paused:媒体是否暂停 只读
+ 		ended:媒体是否播放完毕 只读
+ 		error:媒体发生错误，返回错误代码
+ 		currentSrc:以字符串形式返回媒体地址
+ 		
+ 		视频自带功能
+ 		poster 视频预览图片
+ 		width height宽高
+ 		videowidth videoheight视频实际宽高
+ 		
+ 		play()媒体播放
+ 		pause()媒体暂停
+ 		load()媒体重新加载,可以执行新的媒体源,可以配合src使用
+ 	*/
+ 
+ 	$('.playbt').click(function(){
+ 		if($('.playbt').find('.play').length){
+ 			$('.playbt').find('.play').attr('class','pause');
+ 			$('audio').get(0).pause();
+ 			
+ 		}
+ 		else{
+ 			$('.playbt').find('.pause').attr('class','play');
+ 			$('audio').get(0).play();
+ 		}
+ 	});
+ </script>
+ 
+</html>
