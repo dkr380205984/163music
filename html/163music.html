@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>163.music</title>
+    <title>Myangular.html</title>
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
     <meta name="content-type" content="text/html; charset=UTF-8">
   </head>
   <style>
-  	.foot{position: absolute;bottom:0px;width:100%;height:48px;background-color:rgba(0,0,0,0.7)}
-  	.father{margin:0 auto;width:980px;height:48px;position:relative;}
-  	.left{width:120px;height:48px;position:absolute;left:0;line-height:48px}
-  	.playbt{width:32px;height:32px;border:3px solid white;border-radius:50%;margin:5px 3px;position:absolute;left:38px }
-  	.playbt .play{margin:6px 10px;border-left:3px solid white;border-right:3px solid white;width:6px;height:20px;}
- 	.playbt .pause{width:0px;height:0px;margin:8px 6px 8px 10px;border-left:16px solid white;border-top:8px solid rgba(0,0,0,0);border-bottom:8px solid rgba(0,0,0,0);}
- 	.lastbt{width:38px;height:48px;float:left;}
- 	.nextbt{width:38px;height:48px;float:right;}
- 	.lastbt .last{margin:12px 6px;border-right:20px solid white;border-left:3px solid white;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);}
- 	.nextbt .next{margin:12px 6px;border-right:3px solid white;border-left:20px solid white;border-top:12px solid rgba(0,0,0,0);border-bottom:12px solid rgba(0,0,0,0);}
+  	.middle{width:650px;height:48px;position: absolute;left:120px;}
+  	.middle .musicimg{width:32px;height:32px;margin:8px 15px 8px 25px;float:left;}
+  	.middle .middletop{height:26px;float:left;}
+  	.middle .middletop .musicName{font: normal normal 12px/26px "宋体";float:left;color:white}
+  	.middle .middletop .musicMv{font: normal normal 13px/14px "微软雅黑";float:left;color:white;margin:6px 4px;background: red;border-radius:100%;width:14px;height:14px;;}
+  	.middle .middletop .musicAuthor{font: normal normal 12px/26px "宋体";float:left;color:white;}
+  	.middle .middlebottom{width:500px;height:22px;background:green;position: absolute;left:72px;bottom:0px;}
   </style>
   <link rel="stylesheet" href="../css/reset.css" type="text/css">
+  <link rel="stylesheet" href="../css/163left.css" type="text/css">
   <script src="../js/jquery-1.11.1.js"></script>
   <body>
-  	<audio src="http://mp3.haoduoge.com/s/2017-07-16/1500187827.mp3"></audio>
+  	<audio index="" src=""></audio>
   	<div class="foot">
 	  	<div class="father">
 		  		<div class="left">
@@ -33,7 +33,17 @@
 		  				<div class="next"></div>
 		  			</div>
 		  		</div>
-		  		<div class="middle"></div>
+		  		<div class="middle">
+		  			<img class="musicimg" src="../img/a.jpg"></img>
+		  			<div class="middletop">
+		  				<span class="musicName"></span>
+		  				<div  class="musicMv" ></div>
+		  				<span class="musicAuthor"></span>
+		  			</div>
+		  			<div class="middlebottom">
+		  				<div class="jindutiao"></div>
+		  			</div>
+		  		</div>
 		  		<div class="right"></div>
 		  	</div>
 	  	</div>
@@ -64,17 +74,91 @@
  		pause()媒体暂停
  		load()媒体重新加载,可以执行新的媒体源,可以配合src使用
  	*/
- 
+ 	var audio=$('audio').get(0);
+ 	var music=[{'name':'再见','author':'张震岳','isMv':true,index:'0','src':'http://mp3.haoduoge.com/s/2017-07-16/1500187827.mp3','img':'../img/a.jpg'},
+ 	           {'name':'Ghetto','author':'Acon','isMv':true,index:'1','src':'http://mp3.haoduoge.com/s/2017-07-13/1499939145.mp3','img':'../img/b.jpg'},
+ 	           {'name':'一人饮酒醉','author':'社会东哥版','isMv':false,index:'2','src':'http://mp3.haoduoge.com/s/2017-07-17/1500272306.mp3','img':'../img/c.jpg'},
+ 	           {'name':'甜蜜蜜','author':'邓丽君','isMv':false,index:'3','src':'http://mp3.haoduoge.com/s/2017-07-17/1500250223.mp3','img':'../img/d.jpg'}
+ 	          ];
+ 	function tois(value){
+ 		if(value){
+ 			return "有";
+ 		}
+ 		else{
+ 			return "污";
+ 		}
+ 	}
+ 	
+ 	function xuanran(index){
+ 		$('.musicimg').attr('src',music[index].img);
+ 		$('.musicName').html(music[index].name);
+ 		$('.musicMv').html(tois(music[index].isMv));
+ 		$('.musicAuthor').html(music[index].author);
+ 	}
+ 	function init(){
+ 		var index="";
+	 	if(window.localStorage.getItem('index')){
+	 		index=window.localStorage.getItem('index');
+	 	}
+	 	else{
+	 		index=0;
+	 		window.localStorage.setItem('index', 0);
+	 	}
+	 	xuanran(index);
+	 	return index;
+ 	}
+ 	audio.index=init();
+ 	audio.src=music[audio.index].src;
  	$('.playbt').click(function(){
  		if($('.playbt').find('.play').length){
  			$('.playbt').find('.play').attr('class','pause');
- 			$('audio').get(0).pause();
- 			
+ 			audio.pause();	
  		}
  		else{
  			$('.playbt').find('.pause').attr('class','play');
- 			$('audio').get(0).play();
+ 			audio.play();
  		}
+ 	});
+ 	$('.lastbt').click(function(){
+ 		$('.playbt').find('.pause').attr('class','play');
+ 		if(audio.index==0){
+ 			audio.index=music.length-1;
+ 		}
+ 		else{
+ 			audio.index--;
+ 		}
+ 		xuanran(audio.index);
+ 		window.localStorage.setItem('index', audio.index);
+ 		audio.src=music[audio.index].src;
+ 		audio.load();
+ 		audio.play();
+ 	});
+ 	$('.nextbt').click(function(){
+ 		$('.playbt').find('.pause').attr('class','play');
+ 		if(audio.index==music.length-1){
+ 			audio.index=0;
+ 		}
+ 		else{
+ 			audio.index++;
+ 		}
+ 		xuanran(audio.index);
+ 		window.localStorage.setItem('index', audio.index);
+ 		audio.src=music[audio.index].src;
+ 		audio.load();
+ 		audio.play();
+ 	});
+ 	$('audio').bind('ended',function(){
+ 		if(audio.index==music.length-1){
+ 			audio.index=0;
+ 		}
+ 		else{
+ 			audio.index++;
+ 		}
+ 		xuanran(audio.index);
+ 		window.localStorage.setItem('index', audio.index);
+ 		audio.src=music[audio.index].src;
+ 		audio.load();
+ 		audio.play();
  	});
  </script>
  
