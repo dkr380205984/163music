@@ -7,16 +7,16 @@
     <meta name="content-type" content="text/html; charset=UTF-8">
   </head>
   <style>
-  	.middle{width:650px;height:48px;position: absolute;left:120px;}
-  	.middle .musicimg{width:32px;height:32px;margin:8px 15px 8px 25px;float:left;}
-  	.middle .middletop{height:26px;float:left;}
-  	.middle .middletop .musicName{font: normal normal 12px/26px "ËÎÌå";float:left;color:white}
-  	.middle .middletop .musicMv{font: normal normal 13px/14px "Î¢ÈíÑÅºÚ";float:left;color:white;margin:6px 4px;background: red;border-radius:100%;width:14px;height:14px;;}
-  	.middle .middletop .musicAuthor{font: normal normal 12px/26px "ËÎÌå";float:left;color:white;}
-  	.middle .middlebottom{width:500px;height:22px;background:green;position: absolute;left:72px;bottom:0px;}
+  		.right{width:210px;height:48px;position: absolute;right:0px;}
+  		.right img{float:left;width:22px;height:22px;margin:20px 6px  6px 12px;}
+  		.right .rightjindutiao{height:14px;width:134px;position: absolute;left:40px;bottom:6px;}
+  		.right .rightquan{width:6px;height:6px;background:red;border:4px solid #ccc;border-radius:100%;z-index:4;position:absolute;}
+  		.right .righthong{border-radius:4px;height:6px;background-color:red;position:absolute;margin:4px 7px;z-index:2 }
+  		.right .rightvoice{position:absolute;width:120px;height:6px;background:black;border-radius:4px;margin:4px 7px}
   </style>
   <link rel="stylesheet" href="../css/reset.css" type="text/css">
   <link rel="stylesheet" href="../css/163left.css" type="text/css">
+  <link rel="stylesheet" href="../css/163middle.css" type="text/css">
   <script src="../js/jquery-1.11.1.js"></script>
   <body>
   	<audio index="" src=""></audio>
@@ -41,10 +41,23 @@
 		  				<span class="musicAuthor"></span>
 		  			</div>
 		  			<div class="middlebottom">
-		  				<div class="jindutiao"></div>
+		  				<div class="jindutiao">
+		  					<div class="jinduhong"></div>
+		  					<div class="jinduquan"></div>
+		  				</div>
+		  			</div>
+		  			<div class="middletime">
+		  				<span class="nowtime">00:00</span><span>/</span><span class="alltime">00:00</span>
 		  			</div>
 		  		</div>
-		  		<div class="right"></div>
+		  		<div class="right">
+		  			<img src="../img/1.png"/>
+		  			<div class="rightjindutiao">
+			  			<div class="rightquan"></div>
+			  			<div class="righthong"></div>
+			  			<div class="rightvoice"></div>
+					</div>		  		
+		  		</div>
 		  	</div>
 	  	</div>
   </body>
@@ -52,40 +65,40 @@
  <script type="text/javascript">
  	
  	/*
- 		controls:ÏÔÊ¾»òÕßÒş²Ø
- 		autoplay£ºÃ½ÌåÊÇ·ñ×Ô¶¯²¥·Å
- 		autobuffer£ºÃ½ÌåÊÇ·ñ×Ô¶¯¼ÓÔØ£¬Èç¹ûÓĞautoplay£¬ÕâÊôĞÔ¸úÃ»ÓĞÒ»Ñù
- 		loop:Ã½ÌåÊÇ·ñÑ­»·²¥·Å
- 		currentTime:Ã½ÌåµÄµ±Ç°²¥·ÅÊ±¼ä£¬¿É¶Á¿ÉĞ´
- 		duration:Ã½ÌåµÄ×Ü²¥·ÅÊ±¼ä£¬Ö»¶Á
- 		volume£ºÃ½ÌåÒôÁ¿ÉèÖÃ(0-1Ö®¼ä)
- 		muted£ºÊÇ·ñ¾²Òô
- 		paused:Ã½ÌåÊÇ·ñÔİÍ£ Ö»¶Á
- 		ended:Ã½ÌåÊÇ·ñ²¥·ÅÍê±Ï Ö»¶Á
- 		error:Ã½Ìå·¢Éú´íÎó£¬·µ»Ø´íÎó´úÂë
- 		currentSrc:ÒÔ×Ö·û´®ĞÎÊ½·µ»ØÃ½ÌåµØÖ·
+ 		controls:æ˜¾ç¤ºæˆ–è€…éšè—
+ 		autoplayï¼šåª’ä½“æ˜¯å¦è‡ªåŠ¨æ’­æ”¾
+ 		autobufferï¼šåª’ä½“æ˜¯å¦è‡ªåŠ¨åŠ è½½ï¼Œå¦‚æœæœ‰autoplayï¼Œè¿™å±æ€§è·Ÿæ²¡æœ‰ä¸€æ ·
+ 		loop:åª’ä½“æ˜¯å¦å¾ªç¯æ’­æ”¾
+ 		currentTime:åª’ä½“çš„å½“å‰æ’­æ”¾æ—¶é—´ï¼Œå¯è¯»å¯å†™
+ 		duration:åª’ä½“çš„æ€»æ’­æ”¾æ—¶é—´ï¼Œåªè¯»
+ 		volumeï¼šåª’ä½“éŸ³é‡è®¾ç½®(0-1ä¹‹é—´)
+ 		mutedï¼šæ˜¯å¦é™éŸ³
+ 		paused:åª’ä½“æ˜¯å¦æš‚åœ åªè¯»
+ 		ended:åª’ä½“æ˜¯å¦æ’­æ”¾å®Œæ¯• åªè¯»
+ 		error:åª’ä½“å‘ç”Ÿé”™è¯¯ï¼Œè¿”å›é”™è¯¯ä»£ç 
+ 		currentSrc:ä»¥å­—ç¬¦ä¸²å½¢å¼è¿”å›åª’ä½“åœ°å€
  		
- 		ÊÓÆµ×Ô´ø¹¦ÄÜ
- 		poster ÊÓÆµÔ¤ÀÀÍ¼Æ¬
- 		width height¿í¸ß
- 		videowidth videoheightÊÓÆµÊµ¼Ê¿í¸ß
+ 		è§†é¢‘è‡ªå¸¦åŠŸèƒ½
+ 		poster è§†é¢‘é¢„è§ˆå›¾ç‰‡
+ 		width heightå®½é«˜
+ 		videowidth videoheightè§†é¢‘å®é™…å®½é«˜
  		
- 		play()Ã½Ìå²¥·Å
- 		pause()Ã½ÌåÔİÍ£
- 		load()Ã½ÌåÖØĞÂ¼ÓÔØ,¿ÉÒÔÖ´ĞĞĞÂµÄÃ½ÌåÔ´,¿ÉÒÔÅäºÏsrcÊ¹ÓÃ
+ 		play()åª’ä½“æ’­æ”¾
+ 		pause()åª’ä½“æš‚åœ
+ 		load()åª’ä½“é‡æ–°åŠ è½½,å¯ä»¥æ‰§è¡Œæ–°çš„åª’ä½“æº,å¯ä»¥é…åˆsrcä½¿ç”¨
  	*/
  	var audio=$('audio').get(0);
- 	var music=[{'name':'ÔÙ¼û','author':'ÕÅÕğÔÀ','isMv':true,index:'0','src':'http://mp3.haoduoge.com/s/2017-07-16/1500187827.mp3','img':'../img/a.jpg'},
+ 	var music=[{'name':'å†è§','author':'å¼ éœ‡å²³','isMv':true,index:'0','src':'http://mp3.haoduoge.com/s/2017-07-16/1500187827.mp3','img':'../img/a.jpg'},
  	           {'name':'Ghetto','author':'Acon','isMv':true,index:'1','src':'http://mp3.haoduoge.com/s/2017-07-13/1499939145.mp3','img':'../img/b.jpg'},
- 	           {'name':'Ò»ÈËÒû¾Æ×í','author':'Éç»á¶«¸ç°æ','isMv':false,index:'2','src':'http://mp3.haoduoge.com/s/2017-07-17/1500272306.mp3','img':'../img/c.jpg'},
- 	           {'name':'ÌğÃÛÃÛ','author':'µËÀö¾ı','isMv':false,index:'3','src':'http://mp3.haoduoge.com/s/2017-07-17/1500250223.mp3','img':'../img/d.jpg'}
+ 	           {'name':'ä¸€äººé¥®é…’é†‰','author':'ç¤¾ä¼šä¸œå“¥ç‰ˆ','isMv':false,index:'2','src':'http://mp3.haoduoge.com/s/2017-07-17/1500272306.mp3','img':'../img/c.jpg'},
+ 	           {'name':'ç”œèœœèœœ','author':'é‚“ä¸½å›','isMv':false,index:'3','src':'http://mp3.haoduoge.com/s/2017-07-17/1500250223.mp3','img':'../img/d.jpg'}
  	          ];
  	function tois(value){
  		if(value){
- 			return "ÓĞ";
+ 			return "æœ‰";
  		}
  		else{
- 			return "ÎÛ";
+ 			return "æ±¡";
  		}
  	}
  	
@@ -159,6 +172,99 @@
  		audio.src=music[audio.index].src;
  		audio.load();
  		audio.play();
+ 	});
+ 	var timer="";
+ 	var ctime=null;
+ 	$('.jindutiao').mousedown(function(eve){
+ 		var nowX=eve.pageX-$('.jindutiao').offset().left;
+ 		$('.jinduquan').css('left',nowX);
+ 		ctime=nowX/479*audio.duration;
+ 		$('.jinduhong').css('width',ctime/audio.duration*479+10);
+ 		var disX=eve.pageX-$('.jinduquan').position().left;
+ 		$('.playbt').find('.play').attr('class','pause');
+ 		audio.pause();	
+ 		$(document).mousemove(function(eve){
+ 			var relX=eve.pageX-disX;
+ 			if(relX<=0){
+ 				relX=0;
+ 			}
+ 			else if(relX>=479){
+ 				relX=479;
+ 			}
+ 			$('.jinduquan').css('left',relX);
+ 			ctime=relX/479*audio.duration;
+ 			$('.jinduhong').css('width',ctime/audio.duration*479+10);
+ 		});
+ 		$(document).mouseup(function(eve){
+ 			audio.currentTime=ctime;
+ 			$('.jinduhong').css('width',audio.currentTime/audio.duration*479+10);
+ 			$('.playbt').find('.pause').attr('class','play');
+ 			audio.play();
+ 			$(document).mousemove().off();
+ 		});
+ 		return false;
+ 	});
+ 	var durationtime="00:00";
+ 	var currentTimetime="00:00";
+ 		timer=setInterval(function(){
+ 			if(!audio.paused){
+	 			$('.jinduquan').css('left',audio.currentTime/audio.duration*479);
+	 			$('.jinduhong').css('width',audio.currentTime/audio.duration*479+10);
+	 			durationtime=totime(audio.duration);
+	 			currentTimetime=totime(audio.currentTime);
+	 			$('.alltime').html(durationtime);
+	 			$('.nowtime').html(currentTimetime);
+ 			}
+		 },1000); 
+ 	  
+ 	function totime(time){
+ 		var minute=parseInt(time/60);
+ 		var second=parseInt(time%60);
+ 		if (minute<10){
+ 			minute="0"+minute;
+ 		}
+ 		else if(minute==0){
+ 			minute="00";
+ 		}
+ 		if (second<10){
+ 			second="0"+second;
+ 		}
+ 		else if(second==0){
+ 			second="00";
+ 		}
+ 		return minute+":"+second;
+ 	}
+ 	
+ 	var cvoice=0.5;
+ 	$('.rightquan').css('left',cvoice*120);
+ 	$('.righthong').css('width',cvoice*120);
+ 	$('.rightjindutiao').mousedown(function(eve){	
+ 		var nowX=eve.pageX-$('.rightvoice').offset().left;
+ 		$('.rightquan').css('left',nowX);
+ 		cvoice=nowX/120;
+ 		$('.righthong').css('width',cvoice*120);
+ 		var disX=eve.pageX-$('.rightquan').position().left;
+ 		$(document).mousemove(function(eve){
+ 			var relX=eve.pageX-disX;
+ 			if(relX<=0){
+ 				relX=0;
+ 			}
+ 			else if(relX>=120){
+ 				relX=120;
+ 			}
+ 			$('.rightquan').css('left',relX);
+ 			cvoice=relX/120;
+ 			$('.righthong').css('width',cvoice*120);
+ 			if(cvoice){
+ 				audio.volume=cvoice;
+ 			}
+ 		});
+ 		$(document).mouseup(function(eve){
+ 			audio.volume=cvoice;
+ 			$('.righthong').css('width',cvoice*120);
+ 			$(document).mousemove().off();
+ 		});
+ 		return false;
  	});
  </script>
  
